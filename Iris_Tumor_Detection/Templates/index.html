@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Iris Tumor Detection</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            padding: 50px 0;
+        }
+        .container {
+            background: white;
+            border-radius: 15px;
+            padding: 30px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            max-width: 800px;
+            text-align: center;
+        }
+        h1 {
+            color: #2c3e50;
+            margin-bottom: 20px;
+            font-weight: 600;
+        }
+        .upload-box {
+            border: 2px dashed #dee2e6;
+            border-radius: 10px;
+            padding: 30px;
+            margin: 20px 0;
+            transition: all 0.3s ease;
+        }
+        .upload-box:hover {
+            border-color: #6c757d;
+        }
+        .preview-container {
+            margin: 20px 0;
+            display: none;
+        }
+        #imagePreview {
+            max-width: 300px;
+            border-radius: 10px;
+            margin: 0 auto;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+        }
+        .btn-primary {
+            padding: 12px 30px;
+            font-size: 18px;
+            transition: all 0.3s ease;
+        }
+        .description {
+            color: #666;
+            margin: 20px 0;
+            font-size: 1.1rem;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Iris Tumor Detection System</h1>
+        <p class="description">
+            Upload an eye image to detect the presence of tumors. 
+            Our advanced AI system will analyze the image and provide results with confidence scores.
+        </p>
+        
+        <form action="/" method="post" enctype="multipart/form-data">
+            <div class="upload-box">
+                <input type="file" name="file" id="file" class="form-control" accept="image/*" required onchange="previewImage(this)">
+            </div>
+            
+            <div class="preview-container" id="previewContainer">
+                <img id="imagePreview" src="#" alt="Image Preview">
+            </div>
+
+            <button type="submit" class="btn btn-primary">Analyze Image</button>
+        </form>
+    </div>
+
+    <script>
+        function previewImage(input) {
+            const previewContainer = document.getElementById('previewContainer');
+            const preview = document.getElementById('imagePreview');
+            
+            if (input.files && input.files[0]) {
+                const reader = new FileReader();
+                
+                reader.onload = function(e) {
+                    preview.src = e.target.result;
+                    previewContainer.style.display = 'block';
+                }
+                
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+    </script>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
